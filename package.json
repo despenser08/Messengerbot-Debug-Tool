@@ -1,0 +1,21 @@
+{
+    "name": "messengerbot-debug-tool",
+    "version": "1.0.0",
+    "description": "MessengerBot Debug Tool in Node.js",
+    "main": "",
+    "scripts": {},
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/despenser08/Messengerbot-Debug-Tool.git"
+    },
+    "author": "despenser08",
+    "license": "Apache-2.0",
+    "bugs": {
+        "url": "https://github.com/despenser08/Messengerbot-Debug-Tool/issues"
+    },
+    "homepage": "https://github.com/despenser08/Messengerbot-Debug-Tool#readme",
+    "devDependencies": {
+        "@types/node": "^14.0.26"
+    },
+    "dependencies": {}
+}
