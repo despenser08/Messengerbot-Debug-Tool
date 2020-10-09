@@ -1,4 +1,4 @@
-export declare class App {
+export class App {
     /**
      * 어플리케이션 Context를 반환합니다.
      *
@@ -6,7 +6,8 @@ export declare class App {
      *
      * @returns android.content.Context
      */
-    static getContext(): void;
+    static getContext() {}
+
     /**
      * `onComplete`에는 `error:Throwable`과 `task`의 반환값이 인자로 주어집니다.
      *
@@ -17,9 +18,13 @@ export declare class App {
      *
      * @returns void
      */
-    static runOnUiThread(task: Function, onComplete: (error: Error, task: any) => {}): void;
+    static runOnUiThread(
+        task: Function,
+        onComplete: (error: Error, task: any) => {}
+    ) {}
 }
-export declare class Bot {
+
+export class Bot {
     /**
      * 커맨드 접두어를 설정합니다. 메시지가 prefix로 시작하면 Event.COMMAND이벤트가 발생합니다.
      *
@@ -29,7 +34,8 @@ export declare class Bot {
      *
      * @returns void
      */
-    static setCommandPrefix(prefix: string): void;
+    static setCommandPrefix(prefix: string) {}
+
     /**
      * 해당 패키지의 해당 방으로 메시지를 보냅니다. `packageName`이 `null`일 경우 패키지명을 구분하지 않습니다.
      *
@@ -43,7 +49,8 @@ export declare class Bot {
      *
      * @returns Boolean
      */
-    static send(room: string, msg: string, packageName?: string | null): void;
+    static send(room: string, msg: string, packageName: string | null = null) {}
+
     /**
      * 해당 패키지의 해당 방의 세션을 가지고 있는지 확인합니다. 가지고 있다면 `true`, 그렇지 않다면 `false`를 반환합니다.
      *
@@ -56,7 +63,8 @@ export declare class Bot {
      *
      * @returns Boolean
      */
-    static canReply(room: string, packageName?: string | null): void;
+    static canReply(room: string, packageName: string | null = null) {}
+
     /**
      * 현재 봇의 이름을 반환합니다.
      *
@@ -64,7 +72,8 @@ export declare class Bot {
      *
      * @returns String
      */
-    static getName(): void;
+    static getName() {}
+
     /**
      * 현재 봇의 전원을 설정합니다.
      *
@@ -74,7 +83,8 @@ export declare class Bot {
      *
      * @returns void
      */
-    static setPower(power: boolean): void;
+    static setPower(power: boolean) {}
+
     /**
      * 현재 봇의 전원 상태를 반환합니다.
      *
@@ -82,7 +92,8 @@ export declare class Bot {
      *
      * @returns Boolean
      */
-    static getPower(): void;
+    static getPower() {}
+
     /**
      * 현재 봇을 컴파일합니다.
      *
@@ -90,7 +101,8 @@ export declare class Bot {
      *
      * @returns void
      */
-    static compile(): void;
+    static compile() {}
+
     /**
      * 현재 봇을 언로드합니다.
      *
@@ -98,7 +110,8 @@ export declare class Bot {
      *
      * @returns void
      */
-    static unload(): void;
+    static unload() {}
+
     /**
      * 이벤트 리스너를 등록합니다.
      *
@@ -109,7 +122,8 @@ export declare class Bot {
      *
      * @returns void
      */
-    static on(eventName: string, listener: Function): void;
+    static on(eventName: string, listener: Function) {}
+
     /**
      * 이벤트 리스너를 등록합니다. (Bot#on과 같습니다.)
      *
@@ -120,7 +134,8 @@ export declare class Bot {
      *
      * @returns void
      */
-    static addListener(eventName: string, listener: Function): void;
+    static addListener(eventName: string, listener: Function) {}
+
     /**
      * 마지막으로 등록된 이벤트 리스너를 해제합니다.
      *
@@ -131,7 +146,8 @@ export declare class Bot {
      *
      * @returns void
      */
-    static off(eventName: string, listener?: Function): void;
+    static off(eventName: string, listener?: Function) {}
+
     /**
      * 마지막으로 등록된 이벤트 리스너를 해제합니다. (Bot#off와 같습니다.)
      *
@@ -142,7 +158,8 @@ export declare class Bot {
      *
      * @returns void
      */
-    static removeListener(eventName: string, listener?: Function): void;
+    static removeListener(eventName: string, listener?: Function) {}
+
     /**
      * 모든 이벤트 리스너를 해제합니다.
      *
@@ -152,7 +169,8 @@ export declare class Bot {
      *
      * @returns void
      */
-    static removeAllListeners(eventName: string): void;
+    static removeAllListeners(eventName: string) {}
+
     /**
      * 이벤트 리스너를 등록합니다. `Bot#addListener`와의 차이점은 `Bot#addListener`는 리스너 리스트의 뒤에 추가하는 반면, `Bot#prependListener`는 앞에 추가합니다.
      *
@@ -163,7 +181,8 @@ export declare class Bot {
      *
      * @returns void
      */
-    static prependListener(eventName: string, listener: Function): void;
+    static prependListener(eventName: string, listener: Function) {}
+
     /**
      * 등록된 이벤트 리스너들을 반환합니다.
      *
@@ -173,9 +192,10 @@ export declare class Bot {
      *
      * @returns Array\<Function>
      */
-    static listeners(eventName: string): void;
+    static listeners(eventName: string) {}
 }
-export declare class BotManager {
+
+export class BotManager {
     /**
      * 현재 스크립트에 할당된 `Bot`을 반환합니다.
      *
@@ -183,7 +203,8 @@ export declare class BotManager {
      *
      * @returns Bot
      */
-    static getCurrentBot(): void;
+    static getCurrentBot() {}
+
     /**
      * 해당 이름을 가진 `Bot`을 반환합니다.
      *
@@ -193,7 +214,8 @@ export declare class BotManager {
      *
      * @returns Bot
      */
-    static getBot(botName: string): void;
+    static getBot(botName: string) {}
+
     /**
      * `packageName`앱에서 받은 메시지들의 방제를 배열로 반환합니다.
      *
@@ -205,7 +227,8 @@ export declare class BotManager {
      *
      * @returns Array\<String>
      */
-    static getRooms(packageName?: string): void;
+    static getRooms(packageName?: string) {}
+
     /**
      * 모든 `Bot` 인스턴스를 반환합니다.
      *
@@ -213,7 +236,8 @@ export declare class BotManager {
      *
      * @returns Array\<Bot>
      */
-    static getBotList(): void;
+    static getBotList() {}
+
     /**
      * 해당 봇의 활성 상태를 반환합니다.
      *
@@ -223,7 +247,8 @@ export declare class BotManager {
      *
      * @returns Boolean
      */
-    static getPower(botName: string): void;
+    static getPower(botName: string) {}
+
     /**
      * 해당 봇의 활성 상태를 변경합니다.
      *
@@ -232,7 +257,8 @@ export declare class BotManager {
      * @param botName 봇 이름
      * @param power 봇 전원
      */
-    static setPower(botName: string, power: boolean): void;
+    static setPower(botName: string, power: boolean) {}
+
     /**
      * 모든 봇을 컴파일합니다.
      *
@@ -243,7 +269,8 @@ export declare class BotManager {
      *
      * @returns Boolean
      */
-    static compile(botName: string, throwOnError?: boolean): void;
+    static compile(botName: string, throwOnError: boolean = false) {}
+
     /**
      * 모든 봇을 컴파일합니다.
      *
@@ -251,7 +278,8 @@ export declare class BotManager {
      *
      * @returns void
      */
-    static compileAll(): void;
+    static compileAll() {}
+
     /**
      * 해당 봇이 한번도 컴파일되지 않은 경우 컴파일 합니다.
      *
@@ -262,7 +290,8 @@ export declare class BotManager {
      *
      * @returns Int
      */
-    static prepare(botName: string, throwOnError: boolean): void;
+    static prepare(botName: string, throwOnError: boolean) {}
+
     /**
      * 모든 봇을 `prepare` 합니다.
      *
@@ -272,7 +301,8 @@ export declare class BotManager {
      *
      * @returns Int
      */
-    static prepareAll(throwOnError: boolean): void;
+    static prepareAll(throwOnError: boolean) {}
+
     /**
      * 해당 봇이 컴파일되어 있으면 `true`, 그렇지 않으면 `false`를 반환합니다.
      *
@@ -282,7 +312,8 @@ export declare class BotManager {
      *
      * @returns Boolean
      */
-    static isCompiled(botName: string): void;
+    static isCompiled(botName: string) {}
+
     /**
      * 해당 봇을 언로드합니다. 이렇게 하면 `isCompiled` 플래그가 `false`가 됩니다.
      *
@@ -292,9 +323,10 @@ export declare class BotManager {
      *
      * @returns void
      */
-    static unload(botName: string): void;
+    static unload(botName: string) {}
 }
-export declare class Broadcast {
+
+export class Broadcast {
     /**
      * 해당 이벤트에 리스너를 등록합니다.
      *
@@ -303,7 +335,8 @@ export declare class Broadcast {
      * @param eventName 이벤트 이름
      * @param task 이벤트 리스너
      */
-    static register(eventName: string, task: Function): void;
+    static register(eventName: string, task: Function) {}
+
     /**
      * 해당 이벤트에 등록한 리스너를 해제합니다.
      *
@@ -312,7 +345,8 @@ export declare class Broadcast {
      * @param eventName 이벤트 이름
      * @param task 이벤트 리스너
      */
-    static unregister(eventName: string, task: Function): void;
+    static unregister(eventName: string, task: Function) {}
+
     /**
      * 모든 봇을 대상으로 해당 이벤트를 방출합니다. `value`는 `task`의 인자로 주어집니다.
      *
@@ -321,9 +355,10 @@ export declare class Broadcast {
      * @param eventName 이벤트 이름
      * @param value task 인자
      */
-    static send(eventName: string, value: any): void;
+    static send(eventName: string, value: any) {}
 }
-export declare class Database {
+
+export class Database {
     /**
      * `obj`를 JSON string으로 변환하여 봇 로컬 폴더 내의 Database폴더에 `fileName`으로 저장합니다.
      *
@@ -334,7 +369,8 @@ export declare class Database {
      *
      * @returns void
      */
-    static writeObject(fileName: string, obj: object): void;
+    static writeObject(fileName: string, obj: object) {}
+
     /**
      * `str`의 내용을 봇 로컬 폴더 내의 Database폴더에 `fileName`으로 저장합니다.
      *
@@ -345,7 +381,8 @@ export declare class Database {
      *
      * @returns void
      */
-    static writeString(fileName: string, str: string): void;
+    static writeString(fileName: string, str: string) {}
+
     /**
      * 봇 로컬 폴더 내의 Database폴더에 있는 `fileName`파일을 읽어 자바스크립트 Object로 반환합니다.
      *
@@ -357,7 +394,8 @@ export declare class Database {
      *
      * @returns JSObject
      */
-    static readObject(fileName: string): void;
+    static readObject(fileName: string) {}
+
     /**
      * 봇 로컬 폴더 내의 Database폴더에 있는 `fileName`파일의 내용을 반환합니다.
      *
@@ -367,7 +405,8 @@ export declare class Database {
      *
      * @returns String
      */
-    static readString(fileName: string): void;
+    static readString(fileName: string) {}
+
     /**
      * 봇 로컬 폴더 내의 Database폴더에 `fileName`파일의 존재 여부를 반환합니다.
      *
@@ -377,13 +416,17 @@ export declare class Database {
      *
      * @returns Boolean
      */
-    static exists(fileName: string): void;
+    static exists(fileName: string) {}
 }
-export declare class Event {
+
+export class Event {
     /**
      * 메시지가 수신되었을 때 발생하는 이벤트입니다.
      */
-    static get MESSAGE(): "message";
+    static get MESSAGE(): "message" {
+        return "message";
+    }
+
     /**
      * 메시지가 수신되었으며, 그 메시지가 커맨드 형식일 때 발생하는 이벤트입니다.
      *
@@ -391,74 +434,97 @@ export declare class Event {
      *
      * 전달되는 인자는 Event.MESSAGE의 인자에 추가로 msg.command(수신된 command이름), msg.args(수신된 command의 인자 배열)가 붙습니다.
      */
-    static get COMMAND(): "command";
+    static get COMMAND(): "command" {
+        return "command";
+    }
+
     /**
      * 컴파일 요청이 있을 때, 컴파일이 시작하기 전에 발생하는 이벤트입니다.
      */
-    static get START_COMPILE(): "startCompile";
+    static get START_COMPILE(): "startCompile" {
+        return "startCompile";
+    }
+
     /**
      * 기기에 새로운 알림이 왔을 때 발생하는 이벤트입니다.
      *
      * statusBarNotification, sessionManager가 인자로 전달됩니다.
      */
-    static get NOTIFICATION_POSTED(): "notificationPosted";
+    static get NOTIFICATION_POSTED(): "notificationPosted" {
+        return "notificationPosted";
+    }
+
     /**
      * 매 틱마다 발생하는 이벤트입니다.
      */
-    static get TICK(): "tick";
-    static get Activity(): typeof Activity;
+    static get TICK(): "tick" {
+        return "tick";
+    }
+
+    static get Activity() {
+        return Activity;
+    }
 }
-declare enum Activity {
+
+enum Activity {
     /**
      * 스크립트 액티비티의 onCreate가 호출되면 발생합니다.
      *
      * savedInstanceState, activity가 인자로 전달됩니다.
      */
     CREATE = "activityCreate",
+
     /**
      * 스크립트 액티비티의 onStart가 호출되면 발생합니다.
      *
      * activity가 인자로 전달됩니다.
      */
     START = "activityStart",
+
     /**
      * 스크립트 액티비티의 onResume이 호출되면 발생합니다.
      *
      * activity가 인자로 전달됩니다.
      */
     RESUME = "activityResume",
+
     /**
      * 스크립트 액티비티의 onPause가 호출되면 발생합니다.
      *
      * activity가 인자로 전달됩니다.
      */
     PAUSE = "activityPause",
+
     /**
      * 스크립트 액티비티의 onStop이 호출되면 발생합니다.
      *
      * activity가 인자로 전달됩니다.
      */
     STOP = "activityStop",
+
     /**
      * 스크립트 액티비티의 onRestart가 호출되면 발생합니다.
      *
      * activity가 인자로 전달됩니다.
      */
     RESTART = "activityRestart",
+
     /**
      * 스크립트 액티비티의 onDestroy가 호출되면 발생합니다.
      *
      * activity가 인자로 전달됩니다.
      */
     DESTROY = "activityDestroy",
+
     /**
      * 스크립트 액티비티의 onBackPressed가 호출되면 발생합니다.
      *
      * activity가 인자로 전달됩니다.
      */
-    BACK_PRESSED = "activityBackPressed"
+    BACK_PRESSED = "activityBackPressed",
 }
-export declare class Http {
+
+export class Http {
     /**
      * Jsoup를 통해 request를 보냅니다. 이 메서드는 비동기적입니다.
      *
@@ -481,12 +547,16 @@ export declare class Http {
      *
      * @returns void
      */
-    static request(options: {
-        url: string;
-        timeout?: number | 3000;
-        method?: string | "GET";
-        headers?: {} | null;
-    }, callback: Function): void;
+    static request(
+        options: {
+            url: string;
+            timeout?: number | 3000;
+            method?: string | "GET";
+            headers?: {} | null;
+        },
+        callback: Function
+    ) {}
+
     /**
      * 동기적으로 `request`를 수행합니다. org.jsoup.nodes.Document를 반환합니다.
      *
@@ -501,9 +571,10 @@ export declare class Http {
         timeout?: number | 3000;
         method?: string | "GET";
         headers?: {} | null;
-    }): void;
+    }) {}
 }
-export declare class Security {
+
+export class Security {
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -511,7 +582,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static base64Encode(value: string): void;
+    static base64Encode(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -519,7 +591,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static base64Decode(value: string): void;
+    static base64Decode(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -527,7 +600,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static base32Encode(value: string): void;
+    static base32Encode(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -535,7 +609,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static base32Decode(value: string): void;
+    static base32Decode(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -543,7 +618,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static aesEncode(key: string, initVector: string, value: string): void;
+    static aesEncode(key: string, initVector: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -551,7 +627,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static aesDecode(key: string, initVector: string, value: string): void;
+    static aesDecode(key: string, initVector: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -559,7 +636,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static ariaEncode(key: string, value: string): void;
+    static ariaEncode(key: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -567,7 +645,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static ariaDecode(key: string, value: string): void;
+    static ariaDecode(key: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -575,7 +654,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static desKey(): void;
+    static desKey() {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -583,7 +663,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static desEncode(key: string, value: string): void;
+    static desEncode(key: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -591,7 +672,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static desDecode(key: string, value: string): void;
+    static desDecode(key: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -599,7 +681,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static des3Encode(key: string, value: string): void;
+    static des3Encode(key: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -607,7 +690,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static des3Decode(key: string, value: string): void;
+    static des3Decode(key: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -615,7 +699,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static seedEncode(seed: string, value: string): void;
+    static seedEncode(seed: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -623,7 +708,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static seedDecode(seed: string, value: string): void;
+    static seedDecode(seed: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -631,7 +717,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static rc4Encode(key: string, value: string): void;
+    static rc4Encode(key: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -639,7 +726,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static rc4Decode(key: string, value: string): void;
+    static rc4Decode(key: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -647,7 +735,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static eccKey(value: string): void;
+    static eccKey(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -655,7 +744,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static eccEncode(key: string, value: string): void;
+    static eccEncode(key: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -663,7 +753,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static eccDecode(key: string, value: string): void;
+    static eccDecode(key: string, value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -671,7 +762,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static hashCode(value: string): void;
+    static hashCode(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -679,7 +771,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static md2(value: string): void;
+    static md2(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -687,7 +780,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static md5(value: string): void;
+    static md5(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -695,7 +789,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static sha5(value: string): void;
+    static sha5(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -703,7 +798,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static sha256(value: string): void;
+    static sha256(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -711,7 +807,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static sha384(value: string): void;
+    static sha384(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -719,7 +816,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static sha512(value: string): void;
+    static sha512(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -727,7 +825,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static sha3_224(value: string): void;
+    static sha3_224(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -735,7 +834,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static sha3_256(value: string): void;
+    static sha3_256(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -743,7 +843,8 @@ export declare class Security {
      *
      * @returns String
      */
-    static sha3_384(value: string): void;
+    static sha3_384(value: string) {}
+
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
@@ -751,14 +852,15 @@ export declare class Security {
      *
      * @returns String
      */
-    static sha3_512(value: string): void;
+    static sha3_512(value: string) {}
 }
+
 /**
  * SessionManager는 Event.NOTIFICATION_POSTED의 리스너에 전달되는 인자로,
  *
  * 채팅방 세션을 메신저봇 앱에 수동으로 등록할 수 있게 해주어 메신저봇이 공식적으로 지원하지 않는 메신저 앱을 사용할 때 활용할 수 있습니다.
  */
-export declare class SessionManager {
+export class SessionManager {
     /**
      * `packageName`이라는 메신저 앱의 `room`채팅방에 대해 메시지 전송 액션인 `action`을 할당합니다.
      *
@@ -777,6 +879,9 @@ export declare class SessionManager {
      *
      * @returns Boolean
      */
-    static bindSession(packageName: string, room: string, action?: "Notification.Action" | null): void;
+    static bindSession(
+        packageName: string,
+        room: string,
+        action: "Notification.Action" | null = null
+    ) {}
 }
-export {};

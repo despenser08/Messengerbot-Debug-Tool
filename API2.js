@@ -1,531 +1,487 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sessionManager = exports.security = exports.http = exports.Event = exports.database = exports.broadcast = exports.botManager = exports.app = void 0;
-const fs_1 = __importDefault(require("fs"));
-class app {
+exports.SessionManager = exports.Security = exports.Http = exports.Event = exports.Database = exports.Broadcast = exports.BotManager = exports.Bot = exports.App = void 0;
+class App {
     /**
      * 어플리케이션 Context를 반환합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns android.content.Context
      */
-    getContext() { }
+    static getContext() { }
     /**
-     * `task`를 UIThread에서 호출합니다. `task`가 끝나면, `onComplete`를 호출합니다.
-     *
-     * 이 메소드는 아직 지원하지 않습니다.
-     *
      * `onComplete`에는 `error:Throwable`과 `task`의 반환값이 인자로 주어집니다.
+     *
+     * 이**이 메소드는 아직 지원하지 않습니다.**
      *
      * @param task `task`를 UIThread에서 호출합니다.
      * @param onComplete `task`가 끝나면, `onComplete`를 호출합니다.
+     *
      * @returns void
      */
-    runOnUiThread(task, onComplete) {
-        let result, error;
-        try {
-            result = task();
-        }
-        catch (e) {
-            error = e;
-        }
-        onComplete(error, result);
-    }
+    static runOnUiThread(task, onComplete) { }
 }
-exports.app = app;
+exports.App = App;
 class Bot {
-    constructor(botName, sender, rooms, packageName = "com.kakao.talk") {
-        this.botName = botName;
-        this.sender = sender;
-        this.rooms = rooms;
-        this.packageName = packageName;
-    }
     /**
      * 커맨드 접두어를 설정합니다. 메시지가 prefix로 시작하면 Event.COMMAND이벤트가 발생합니다.
      *
-     * @param prefix 접두사
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
+     * @param prefix 커맨드 접두어
+     *
      * @returns void
      */
-    setCommandPrefix(prefix) {
-        this.prefix = prefix;
-    }
+    static setCommandPrefix(prefix) { }
     /**
      * 해당 패키지의 해당 방으로 메시지를 보냅니다. `packageName`이 `null`일 경우 패키지명을 구분하지 않습니다.
      *
+     * 해당 방의 세션이 있을 경우 `true`, 그렇지 않을 경우 `false`를 반환합니다.
+     *
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
      * @param room 방 이름
      * @param msg 메시지
-     * @param packageName 패키지 이름
+     * @param packageName 패키지명
+     *
      * @returns Boolean
      */
-    send(room, msg, packageName) {
-        if (room === this.rooms[0] &&
-            (packageName === null || packageName === this.packageName)) {
-            console.log(`[${this.botName}] Room: ${room} | From: ${this.sender} | Package Name: ${packageName ? packageName : "All"}\n[${this.botName}]: ${msg}`);
-            return true;
-        }
-        return false;
-    }
+    static send(room, msg, packageName = null) { }
     /**
      * 해당 패키지의 해당 방의 세션을 가지고 있는지 확인합니다. 가지고 있다면 `true`, 그렇지 않다면 `false`를 반환합니다.
      *
      * `packageName`이 `null`일 경우 패키지명을 구분하지 않습니다.
      *
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
      * @param room 방 이름
-     * @param packageName 패키지 이름
+     * @param packageName 패키지명
+     *
      * @returns Boolean
      */
-    canReply(room, packageName) {
-        if (room === this.rooms[0] &&
-            (packageName === null || packageName === this.packageName))
-            return true;
-        return false;
-    }
+    static canReply(room, packageName = null) { }
     /**
      * 현재 봇의 이름을 반환합니다.
-
+     *
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
      * @returns String
      */
-    getName() {
-        return this.botName;
-    }
+    static getName() { }
     /**
      * 현재 봇의 전원을 설정합니다.
      *
-     * @param power 전원 여부
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
+     * @param power 봇의 전원
+     *
      * @returns void
      */
-    setPower(power) {
-        this.power = power;
-    }
+    static setPower(power) { }
     /**
      * 현재 봇의 전원 상태를 반환합니다.
      *
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
      * @returns Boolean
      */
-    getPower() {
-        return this.power;
-    }
+    static getPower() { }
     /**
      * 현재 봇을 컴파일합니다.
      *
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
      * @returns void
      */
-    compile() {
-        this.power = true;
-        console.log(`[${this.botName}] Compiled.`);
-    }
+    static compile() { }
     /**
      * 현재 봇을 언로드합니다.
      *
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
      * @returns void
      */
-    unload() {
-        this.power = false;
-        console.log(`[${this.botName}] Unloaded; Bot will not work`);
-    }
+    static unload() { }
     /**
      * 이벤트 리스너를 등록합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param eventName 이벤트 이름
-     * @param listener 리스너
+     * @param listener 이벤트 리스너
+     *
      * @returns void
      */
-    on(eventName, listener) {
-        this.events[eventName].push(listener);
-    }
+    static on(eventName, listener) { }
     /**
-     * Bot#on과 같습니다.
+     * 이벤트 리스너를 등록합니다. (Bot#on과 같습니다.)
+     *
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param eventName 이벤트 이름
-     * @param listener 리스너
+     * @param listener 이벤트 리스너
+     *
      * @returns void
      */
-    addListener(eventName, listener) {
-        this.on(eventName, listener);
-    }
+    static addListener(eventName, listener) { }
     /**
      * 마지막으로 등록된 이벤트 리스너를 해제합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param eventName 이벤트 이름
-     * @param listener 리스너
+     * @param listener 이벤트 리스너
+     *
      * @returns void
      */
-    off(eventName, listener) {
-        this.events[eventName].pop();
-    }
+    static off(eventName, listener) { }
     /**
-     * Bot#off와 같습니다.
+     * 마지막으로 등록된 이벤트 리스너를 해제합니다. (Bot#off와 같습니다.)
+     *
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param eventName 이벤트 이름
-     * @param listener 리스너
+     * @param listener 이벤트 리스너
+     *
      * @returns void
      */
-    removeListener(eventName, listener) {
-        this.off(eventName, listener);
-    }
+    static removeListener(eventName, listener) { }
     /**
      * 모든 이벤트 리스너를 해제합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param eventName 이벤트 이름
+     *
      * @returns void
      */
-    removeAllListeners(eventName) {
-        while (this.events[eventName].length === 0)
-            this.events[eventName].shift();
-    }
+    static removeAllListeners(eventName) { }
     /**
      * 이벤트 리스너를 등록합니다. `Bot#addListener`와의 차이점은 `Bot#addListener`는 리스너 리스트의 뒤에 추가하는 반면, `Bot#prependListener`는 앞에 추가합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param eventName 이벤트 이름
-     * @param listener 리스너
+     * @param listener 이벤트 리스너
+     *
      * @returns void
      */
-    prependListener(eventName, listener) {
-        this.events[eventName].unshift(listener);
-    }
+    static prependListener(eventName, listener) { }
     /**
      * 등록된 이벤트 리스너들을 반환합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param eventName 이벤트 이름
-     * @returns Function[]
+     *
+     * @returns Array\<Function>
      */
-    listeners(eventName) {
-        return this.events[eventName];
-    }
+    static listeners(eventName) { }
 }
-class botManager {
-    /**
-     * @param BotName 봇 이름
-     * @param Sender 유저네임
-     * @param Rooms 방 이름들 (첫번째 방이 디버그할 방 이름이 됩니다.)
-     * @param PackageName 알림을 읽을 패키지의 이름 (기본: `com.kakao.talk`)
-     */
-    constructor(BotName, Sender, Rooms, PackageName = "com.kakao.talk") {
-        this.botName = BotName;
-        this.sender = Sender;
-        this.rooms = Rooms;
-        this.packageName = PackageName;
-    }
+exports.Bot = Bot;
+class BotManager {
     /**
      * 현재 스크립트에 할당된 `Bot`을 반환합니다.
      *
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
      * @returns Bot
      */
-    getCurrentBot() {
-        return new Bot(this.botName, this.sender, this.rooms, this.packageName);
-    }
+    static getCurrentBot() { }
     /**
      * 해당 이름을 가진 `Bot`을 반환합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @return null
+     * @param botName 봇 이름
+     *
+     * @returns Bot
      */
-    getBot() {
-        return null;
-    }
+    static getBot(botName) { }
     /**
      * `packageName`앱에서 받은 메시지들의 방제를 배열로 반환합니다.
      *
      * `packageName`이 null이면 모든 앱에서 받은 메시지들의 방제를 배열로 반환합니다.
      *
-     * @param packageName 패키지 이름
-     * @returns String[]
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
+     * @param packageName 패키지명
+     *
+     * @returns Array\<String>
      */
-    getRooms(packageName) {
-        return this.rooms;
-    }
+    static getRooms(packageName) { }
     /**
      * 모든 `Bot` 인스턴스를 반환합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns Bot[]
+     * @returns Array\<Bot>
      */
-    getBotList() {
-        let bots;
-        bots.push(new Bot(this.botName, this.sender, this.rooms, this.packageName));
-        return bots;
-    }
+    static getBotList() { }
     /**
      * 해당 봇의 활성 상태를 반환합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param botName 봇 이름
+     *
      * @returns Boolean
      */
-    getPower(botName) {
-        if (botName === this.botName)
-            return this.getCurrentBot().getPower();
-        return false;
-    }
+    static getPower(botName) { }
     /**
      * 해당 봇의 활성 상태를 변경합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param botName 봇 이름
-     * @param power 전원 여부
-     * @returns void
+     * @param power 봇 전원
      */
-    setPower(botName, power) {
-        if (botName === this.botName)
-            this.getCurrentBot().setPower(power);
-    }
-    /**
-     * 해당 봇을 컴파일합니다.
-     *
-     * 이 메소드는 아직 지원하지 않습니다.
-     *
-     * @param botName 봇 이름
-     * @param throwOnError 에러 받기
-     * @returns Boolean
-     */
-    compile(botName, throwOnError = false) {
-        if (botName === this.botName) {
-            try {
-                this.getCurrentBot().compile();
-                return true;
-            }
-            catch (e) {
-                if (throwOnError)
-                    throw e;
-                return false;
-            }
-        }
-        return false;
-    }
+    static setPower(botName, power) { }
     /**
      * 모든 봇을 컴파일합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
+     * @param botName 봇 이름
+     * @param throwOnError 에러 받기
+     *
+     * @returns Boolean
+     */
+    static compile(botName, throwOnError = false) { }
+    /**
+     * 모든 봇을 컴파일합니다.
+     *
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @returns void
      */
-    compileAll() {
-        this.getCurrentBot().compile();
-    }
+    static compileAll() { }
     /**
      * 해당 봇이 한번도 컴파일되지 않은 경우 컴파일 합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param botName 봇 이름
      * @param throwOnError 에러 받기
-     * @returns Number
+     *
+     * @returns Int
      */
-    prepare(botName, throwOnError) {
-        if (botName === this.botName) {
-            try {
-                this.getCurrentBot().compile();
-                return 1;
-            }
-            catch (e) {
-                if (throwOnError)
-                    throw e;
-                return 1;
-            }
-        }
-        return 2;
-    }
+    static prepare(botName, throwOnError) { }
     /**
      * 모든 봇을 `prepare` 합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param throwOnError 에러 받기
-     * @returns Number
+     *
+     * @returns Int
      */
-    prepareAll(throwOnError) {
-        try {
-            this.getCurrentBot().compile();
-            return 1;
-        }
-        catch (e) {
-            if (throwOnError)
-                throw e;
-            return 1;
-        }
-        // return 0;
-    }
+    static prepareAll(throwOnError) { }
     /**
      * 해당 봇이 컴파일되어 있으면 `true`, 그렇지 않으면 `false`를 반환합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param botName 봇 이름
+     *
      * @returns Boolean
      */
-    isCompiled(botName) {
-        if (botName === this.botName)
-            return true;
-        return false;
-    }
+    static isCompiled(botName) { }
     /**
      * 해당 봇을 언로드합니다. 이렇게 하면 `isCompiled` 플래그가 `false`가 됩니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param botName 봇 이름
+     *
      * @returns void
      */
-    unload(botName) {
-        if (botName === this.botName)
-            this.getCurrentBot().unload();
-    }
+    static unload(botName) { }
 }
-exports.botManager = botManager;
-class broadcast {
+exports.BotManager = BotManager;
+class Broadcast {
     /**
-     * 이벤트 리스너를 등록합니다.
+     * 해당 이벤트에 리스너를 등록합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param eventName 이벤트 이름
-     * @param task 테스크
-     * @returns void
+     * @param task 이벤트 리스너
      */
-    register(eventName, task) {
-        this.events.push({ eventName: eventName, task: task });
-    }
+    static register(eventName, task) { }
     /**
      * 해당 이벤트에 등록한 리스너를 해제합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param eventName 이벤트 이름
-     * @param task 테스크
-     * @returns void
+     * @param task 이벤트 리스너
      */
-    unregister(eventName, task) {
-        for (let i = 0; i < this.events.length; i++) {
-            if (eventName === this.events[i].eventName &&
-                task === this.events[i].task)
-                this.events.splice(i);
-        }
-    }
+    static unregister(eventName, task) { }
     /**
      * 모든 봇을 대상으로 해당 이벤트를 방출합니다. `value`는 `task`의 인자로 주어집니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
      * @param eventName 이벤트 이름
-     * @param value 테스트 인자 값
+     * @param value task 인자
      */
-    send(eventName, value) {
-        this.events.forEach((event) => {
-            if (eventName === event.eventName)
-                event.task(value);
-        });
-    }
+    static send(eventName, value) { }
 }
-exports.broadcast = broadcast;
-class database {
+exports.Broadcast = Broadcast;
+class Database {
     /**
      * `obj`를 JSON string으로 변환하여 봇 로컬 폴더 내의 Database폴더에 `fileName`으로 저장합니다.
      *
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
      * @param fileName 파일 이름
      * @param obj JS 오브젝트
+     *
      * @returns void
      */
-    writeObject(fileName, obj) {
-        fs_1.default.writeFileSync(`Database/${fileName}`, JSON.stringify(obj));
-    }
+    static writeObject(fileName, obj) { }
     /**
      * `str`의 내용을 봇 로컬 폴더 내의 Database폴더에 `fileName`으로 저장합니다.
      *
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
      * @param fileName 파일 이름
      * @param str 내용
+     *
      * @returns void
      */
-    writeString(fileName, str) {
-        fs_1.default.writeFileSync(`Database/${fileName}`, str.toString());
-    }
+    static writeString(fileName, str) { }
     /**
      * 봇 로컬 폴더 내의 Database폴더에 있는 `fileName`파일을 읽어 자바스크립트 Object로 반환합니다.
      *
      * 이때 해당 파일은 json이어야 합니다.
      *
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
      * @param fileName 파일 이름
-     * @returns Object
+     *
+     * @returns JSObject
      */
-    readObject(fileName) {
-        try {
-            return JSON.parse(fs_1.default.readFileSync(`Database/${fileName}`, { encoding: "utf-8" }));
-        }
-        catch (e) {
-            throw e;
-        }
-    }
+    static readObject(fileName) { }
     /**
      * 봇 로컬 폴더 내의 Database폴더에 있는 `fileName`파일의 내용을 반환합니다.
      *
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
      * @param fileName 파일 이름
+     *
      * @returns String
      */
-    readString(fileName) {
-        try {
-            return fs_1.default.readFileSync(`Database/${fileName}`, {
-                encoding: "utf-8",
-            });
-        }
-        catch (e) {
-            throw e;
-        }
-    }
+    static readString(fileName) { }
     /**
      * 봇 로컬 폴더 내의 Database폴더에 `fileName`파일의 존재 여부를 반환합니다.
      *
+     * **이 메소드는 아직 지원하지 않습니다.**
+     *
      * @param fileName 파일 이름
+     *
      * @returns Boolean
      */
-    exists(fileName) {
-        return fs_1.default.existsSync(`Database/${fileName}`);
+    static exists(fileName) { }
+}
+exports.Database = Database;
+class Event {
+    /**
+     * 메시지가 수신되었을 때 발생하는 이벤트입니다.
+     */
+    static get MESSAGE() {
+        return "message";
+    }
+    /**
+     * 메시지가 수신되었으며, 그 메시지가 커맨드 형식일 때 발생하는 이벤트입니다.
+     *
+     * 자세한 내용은 [Bot#setCommandPrefix](https://gist.github.com/mir99712/6b428aa0c1bacfa170c8d140fa34e336#void-setcommandprefixstring-prefix)를 참고하세요.
+     *
+     * 전달되는 인자는 Event.MESSAGE의 인자에 추가로 msg.command(수신된 command이름), msg.args(수신된 command의 인자 배열)가 붙습니다.
+     */
+    static get COMMAND() {
+        return "command";
+    }
+    /**
+     * 컴파일 요청이 있을 때, 컴파일이 시작하기 전에 발생하는 이벤트입니다.
+     */
+    static get START_COMPILE() {
+        return "startCompile";
+    }
+    /**
+     * 기기에 새로운 알림이 왔을 때 발생하는 이벤트입니다.
+     *
+     * statusBarNotification, sessionManager가 인자로 전달됩니다.
+     */
+    static get NOTIFICATION_POSTED() {
+        return "notificationPosted";
+    }
+    /**
+     * 매 틱마다 발생하는 이벤트입니다.
+     */
+    static get TICK() {
+        return "tick";
+    }
+    static get Activity() {
+        return Activity;
     }
 }
-exports.database = database;
-var Event;
-(function (Event) {
-    Event["MESSAGE"] = "message";
-    Event["COMMAND"] = "command";
-    Event["START_COMPILE"] = "startCompile";
-    Event["NOTIFICATION_POSTED"] = "notificationPosted";
-    Event["TICK"] = "tick";
-    Event["ActivityCREATE"] = "activityCreate";
-    Event["ActivitySTART"] = "activityStart";
-    Event["ActivityRESUME"] = "activityResume";
-    Event["ActivityPAUSE"] = "activityPause";
-    Event["ActivitySTOP"] = "activityStop";
-    Event["ActivityRESTART"] = "activityRestart";
-    Event["ActivityDESTROY"] = "activityDestroy";
-    Event["ActivityBACK_PRESSED"] = "activityBackPressed";
-})(Event = exports.Event || (exports.Event = {}));
-class http {
+exports.Event = Event;
+var Activity;
+(function (Activity) {
     /**
-     * 해당 url에 Jsoup를 통해 request를 보냅니다. 이 메서드는 비동기적입니다.
+     * 스크립트 액티비티의 onCreate가 호출되면 발생합니다.
      *
-     * callBack에 전달되는 인자:
-     * ```js
-     * error: java.lang.Exception
-     * response: org.jsoup.Connection.Response
-     * doc: org.jsoup.nodes.Document
-     * ```
+     * savedInstanceState, activity가 인자로 전달됩니다.
+     */
+    Activity["CREATE"] = "activityCreate";
+    /**
+     * 스크립트 액티비티의 onStart가 호출되면 발생합니다.
      *
+     * activity가 인자로 전달됩니다.
+     */
+    Activity["START"] = "activityStart";
+    /**
+     * 스크립트 액티비티의 onResume이 호출되면 발생합니다.
+     *
+     * activity가 인자로 전달됩니다.
+     */
+    Activity["RESUME"] = "activityResume";
+    /**
+     * 스크립트 액티비티의 onPause가 호출되면 발생합니다.
+     *
+     * activity가 인자로 전달됩니다.
+     */
+    Activity["PAUSE"] = "activityPause";
+    /**
+     * 스크립트 액티비티의 onStop이 호출되면 발생합니다.
+     *
+     * activity가 인자로 전달됩니다.
+     */
+    Activity["STOP"] = "activityStop";
+    /**
+     * 스크립트 액티비티의 onRestart가 호출되면 발생합니다.
+     *
+     * activity가 인자로 전달됩니다.
+     */
+    Activity["RESTART"] = "activityRestart";
+    /**
+     * 스크립트 액티비티의 onDestroy가 호출되면 발생합니다.
+     *
+     * activity가 인자로 전달됩니다.
+     */
+    Activity["DESTROY"] = "activityDestroy";
+    /**
+     * 스크립트 액티비티의 onBackPressed가 호출되면 발생합니다.
+     *
+     * activity가 인자로 전달됩니다.
+     */
+    Activity["BACK_PRESSED"] = "activityBackPressed";
+})(Activity || (Activity = {}));
+class Http {
+    /**
      * Jsoup를 통해 request를 보냅니다. 이 메서드는 비동기적입니다.
      *
      * options의 형태:
@@ -540,273 +496,283 @@ class http {
      * }
      * ```
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @param options 옵션
+     * @param callback 콜백
+     *
+     * @returns void
      */
-    request() { }
+    static request(options, callback) { }
     /**
      * 동기적으로 `request`를 수행합니다. org.jsoup.nodes.Document를 반환합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @param options 옵션
+     *
+     * @returns org.jsoup.nodes.Document
      */
-    requestSync() { }
+    static requestSync(options) { }
 }
-exports.http = http;
-class security {
+exports.Http = Http;
+class Security {
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    base64Encode() { }
+    static base64Encode(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    base64Decode() { }
+    static base64Decode(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    base32Encode() { }
+    static base32Encode(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    base32Decode() { }
+    static base32Decode(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    aesEncode() { }
+    static aesEncode(key, initVector, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    aesDecode() { }
+    static aesDecode(key, initVector, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    ariaEncode() { }
+    static ariaEncode(key, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    ariaDecode() { }
+    static ariaDecode(key, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    deskey() { }
+    static desKey() { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    desEncode() { }
+    static desEncode(key, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    desDecode() { }
+    static desDecode(key, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    des3Encode() { }
+    static des3Encode(key, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    des3Decode() { }
+    static des3Decode(key, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    seedEncode() { }
+    static seedEncode(seed, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    seedDecode() { }
+    static seedDecode(seed, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    rc4Encode() { }
+    static rc4Encode(key, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    rc4Decode() { }
+    static rc4Decode(key, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    eccKey() { }
+    static eccKey(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    eccEncode() { }
+    static eccEncode(key, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    eccDecode() { }
+    static eccDecode(key, value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    hashCode() { }
+    static hashCode(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    md2() { }
+    static md2(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    md5() { }
+    static md5(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    sha() { }
+    static sha5(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    sha256() { }
+    static sha256(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    sha384() { }
+    static sha384(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    sha512() { }
+    static sha512(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    sha3_224() { }
+    static sha3_224(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    sha3_256() { }
+    static sha3_256(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    sha3_384() { }
+    static sha3_384(value) { }
     /**
      * 각종 암호화/복호화 메서드를 제공합니다.
      *
-     * 이 메소드는 아직 지원하지 않습니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * @returns any
+     * @returns String
      */
-    sha3_512() { }
+    static sha3_512(value) { }
 }
-exports.security = security;
-class sessionManager {
+exports.Security = Security;
+/**
+ * SessionManager는 Event.NOTIFICATION_POSTED의 리스너에 전달되는 인자로,
+ *
+ * 채팅방 세션을 메신저봇 앱에 수동으로 등록할 수 있게 해주어 메신저봇이 공식적으로 지원하지 않는 메신저 앱을 사용할 때 활용할 수 있습니다.
+ */
+class SessionManager {
     /**
      * `packageName`이라는 메신저 앱의 `room`채팅방에 대해 메시지 전송 액션인 `action`을 할당합니다.
      *
@@ -817,16 +783,14 @@ class sessionManager {
      *
      * `action`이 `null`이고, 메신저봇이 자동 분석한 답장 액션 또한 `null`일 경우 `false`를 반환하며, 그 외에는 `true`를 반환합니다.
      *
-     * `bindSession(String packageName, String room, Notification.Action action = null)`과 매커니즘은 같지만, `packageName`을 메신저봇이 자동 분석합니다.
+     * **이 메소드는 아직 지원하지 않습니다.**
      *
-     * `action`이 `null`일 경우 메신저봇이 자동 분석한 답장 액션을 사용합니다.
+     * @param packageName 패키지명
+     * @param room 방 이름
+     * @param action 메시지 전송 액션
      *
-     * `action`이 `null`이고, 메신저봇이 자동 분석한 답장 액션 또한 `null`일 경우 `false`를 반환하며, 그 외에는 `true`를 반환합니다.
-     *
-     * 이 메소드는 아직 지원하지 않습니다.
-     *
-     * @returns any
+     * @returns Boolean
      */
-    bindSession() { }
+    static bindSession(packageName, room, action = null) { }
 }
-exports.sessionManager = sessionManager;
+exports.SessionManager = SessionManager;

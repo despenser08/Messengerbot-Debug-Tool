@@ -8,37 +8,70 @@ MessengerBot Debug Tool in Node.js
 
 ### 이 코드를 디버깅할때만 코드 맨 위에 붙여놓으십시오.
 
-#### JavaScript/API1 (미완성) :
+### API1
 
-```js
-const {} = require("messengerbotr-debug-tool/API2"); // 패키지 가져오기
-// 클래스들 가져오기
-```
-
-#### JavaScript/API2 (개발중) :
+#### JavaScript (개발중) :
 
 ```js
 const {
-    app,
-    botManager,
-    broadcast,
-    database,
+    App,
+    Bot,
+    BotManager,
+    Broadcast,
+    Database,
     Event,
-    http,
-    security,
-    sessionManager,
-} = require("messengerbotr-debug-tool/API2"); // 패키지 가져오기
-// 클래스들 가져오기
-const App = new app();
-const BotManager = new botManager(
-    "봇 이름",
-    "유저네임",
-    ["방 이름 1", "방 이름 2"],
-    "com.kakao.talk"
-);
-const Broadcast = new broadcast();
-const Database = new database();
-const Http = new http();
-const Security = new security();
-const SessionManager = new sessionManager();
+    Http,
+    Security,
+    SessionManager,
+} = require("messengerbot-debug-tool/dist/API1");
+```
+
+#### TypeScript (개발중) :
+
+```ts
+import {
+    App,
+    Bot,
+    BotManager,
+    Broadcast,
+    Database,
+    Event,
+    Http,
+    Security,
+    SessionManager,
+} from "./dist/API1";
+```
+
+### API2
+
+#### JavaScript (개발중) :
+
+```js
+const {
+    App,
+    Bot,
+    BotManager,
+    Broadcast,
+    Database,
+    Event,
+    Http,
+    Security,
+    SessionManager,
+} = require("messengerbot-debug-tool/dist/API2");
+```
+
+#### TypeScript (개발중) :
+
+```ts
+import {
+    App,
+    Bot,
+    BotManager,
+    Broadcast,
+    Database,
+    Event,
+    Http,
+    Security,
+    SessionManager,
+} from "./dist/API2";
 ```
