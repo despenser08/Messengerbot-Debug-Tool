@@ -1,6 +1,6 @@
 {
     "name": "messengerbot-debug-tool",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "description": "MessengerBot Debug Tool in Node.js",
     "main": "dist/",
     "scripts": {

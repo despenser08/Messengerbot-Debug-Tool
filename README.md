@@ -23,7 +23,7 @@ const {
     Http,
     Security,
     SessionManager,
-} = require("messengerbot-debug-tool/dist/API1");
+} = require("messengerbot-debug-tool/API1");
 ```
 
 #### TypeScript (개발중) :
@@ -39,7 +39,7 @@ import {
     Http,
     Security,
     SessionManager,
-} from "./dist/API1";
+} from "messengerbot-debug-tool/API1";
 ```
 
 ### API2
@@ -57,7 +57,7 @@ const {
     Http,
     Security,
     SessionManager,
-} = require("messengerbot-debug-tool/dist/API2");
+} = require("messengerbot-debug-tool/API2");
 ```
 
 #### TypeScript (개발중) :
@@ -73,5 +73,7 @@ import {
     Http,
     Security,
     SessionManager,
-} from "./dist/API2";
+} from "messengerbot-debug-tool/API2";
 ```
+
+##### 참고로 저는 JavaScript나 TypeScript와 같은 언어에 지식이 없습니다. 도와주세요.
